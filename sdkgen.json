@@ -2,7 +2,7 @@
   "type": "client-csharp",
   "require": {
     "sdkfabric/airtable": {
-      "target": "./src/SdkFabric.",
+      "target": "./src/SdkFabric.Airtable",
       "namespace": "SdkFabric."
     }
   }
