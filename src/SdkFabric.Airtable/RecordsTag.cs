@@ -136,5 +136,111 @@ public class RecordsTag : TagAbstract {
         };
     }
 
+    /**
+     * Updates up to 10 records, or upserts them when performUpsert is set.
+     */
+    public async Task<BulkUpdateResponse> ReplaceAll(string baseId, string tableIdOrName, BulkUpdateRequest payload)
+    {
+        Dictionary<string, object> pathParams = new();
+        pathParams.Add("baseId", baseId);
+        pathParams.Add("tableIdOrName", tableIdOrName);
+
+        Dictionary<string, object> queryParams = new();
+
+        List<string> queryStructNames = new();
+
+        RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName", pathParams), Method.Put);
+        this.Parser.Query(request, queryParams, queryStructNames);
+        request.AddJsonBody(JsonSerializer.Serialize(payload));
+
+        RestResponse response = await this.HttpClient.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            return this.Parser.Parse<BulkUpdateResponse>(response.Content);
+        }
+
+        if (response.ErrorException != null)
+        {
+            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
+        }
+
+        throw (int) response.StatusCode switch
+        {
+            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
+        };
+    }
+
+    /**
+     * Updates a single record. Table names and table ids can be used interchangeably. We recommend using table IDs so you don&#039;t need to modify your API request when your table name changes.
+     */
+    public async Task<Record> Update(string baseId, string tableIdOrName, string recordId, Record payload)
+    {
+        Dictionary<string, object> pathParams = new();
+        pathParams.Add("baseId", baseId);
+        pathParams.Add("tableIdOrName", tableIdOrName);
+        pathParams.Add("recordId", recordId);
+
+        Dictionary<string, object> queryParams = new();
+
+        List<string> queryStructNames = new();
+
+        RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName/:recordId", pathParams), Method.Patch);
+        this.Parser.Query(request, queryParams, queryStructNames);
+        request.AddJsonBody(JsonSerializer.Serialize(payload));
+
+        RestResponse response = await this.HttpClient.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            return this.Parser.Parse<Record>(response.Content);
+        }
+
+        if (response.ErrorException != null)
+        {
+            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
+        }
+
+        throw (int) response.StatusCode switch
+        {
+            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
+        };
+    }
+
+    /**
+     * Updates up to 10 records, or upserts them when performUpsert is set.
+     */
+    public async Task<BulkUpdateResponse> UpdateAll(string baseId, string tableIdOrName, BulkUpdateRequest payload)
+    {
+        Dictionary<string, object> pathParams = new();
+        pathParams.Add("baseId", baseId);
+        pathParams.Add("tableIdOrName", tableIdOrName);
+
+        Dictionary<string, object> queryParams = new();
+
+        List<string> queryStructNames = new();
+
+        RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName", pathParams), Method.Patch);
+        this.Parser.Query(request, queryParams, queryStructNames);
+        request.AddJsonBody(JsonSerializer.Serialize(payload));
+
+        RestResponse response = await this.HttpClient.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            return this.Parser.Parse<BulkUpdateResponse>(response.Content);
+        }
+
+        if (response.ErrorException != null)
+        {
+            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
+        }
+
+        throw (int) response.StatusCode switch
+        {
+            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
+        };
+    }
+
 
 }

@@ -19,6 +19,9 @@ public class MetaTag : TagAbstract {
     }
 
 
+    /**
+     * Retrieve the user&#039;s ID. For OAuth access tokens, the scopes associated with the token used are also returned.
+     */
     public async Task<User> GetWhoami()
     {
         Dictionary<string, object> pathParams = new();

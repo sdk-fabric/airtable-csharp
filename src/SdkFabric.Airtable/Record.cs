@@ -13,5 +13,5 @@ public class Record
     [JsonPropertyName("createdTime")]
     public string? CreatedTime { get; set; }
     [JsonPropertyName("fields")]
-    public Dictionary<string, string>? Fields { get; set; }
+    public Dictionary<string, object>? Fields { get; set; }
 }
