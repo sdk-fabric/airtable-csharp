@@ -11,7 +11,7 @@ using RestSharp;
 using Sdkgen.Client;
 using Sdkgen.Client.Exception;
 
-namespace SdkFabric.;
+namespace SdkFabric.Airtable;
 
 public class RecordsTag : TagAbstract {
     public RecordsTag(RestClient httpClient, Parser parser): base(httpClient, parser)

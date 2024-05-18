@@ -4,7 +4,7 @@
  */
 
 using System.Text.Json.Serialization;
-namespace SdkFabric.;
+namespace SdkFabric.Airtable;
 public class BulkUpdateRequest
 {
     [JsonPropertyName("performUpsert")]

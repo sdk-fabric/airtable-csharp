@@ -5,7 +5,7 @@
 
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
-namespace SdkFabric.;
+namespace SdkFabric.Airtable;
 public class Record
 {
     [JsonPropertyName("id")]

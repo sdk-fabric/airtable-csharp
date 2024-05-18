@@ -12,7 +12,7 @@ using Sdkgen.Client;
 using Sdkgen.Client.Credentials;
 using Sdkgen.Client.Exception;
 
-namespace SdkFabric.;
+namespace SdkFabric.Airtable;
 
 public class Client : ClientAbstract
 {
