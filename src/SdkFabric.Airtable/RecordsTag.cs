@@ -54,11 +54,6 @@ public class RecordsTag : TagAbstract {
             return this.Parser.Parse<RecordCollection>(response.Content);
         }
 
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
-        }
-
         throw (int) response.StatusCode switch
         {
             _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
@@ -87,11 +82,6 @@ public class RecordsTag : TagAbstract {
         if (response.IsSuccessful)
         {
             return this.Parser.Parse<Record>(response.Content);
-        }
-
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
         }
 
         throw (int) response.StatusCode switch
@@ -125,11 +115,6 @@ public class RecordsTag : TagAbstract {
             return this.Parser.Parse<Record>(response.Content);
         }
 
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
-        }
-
         throw (int) response.StatusCode switch
         {
             _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
@@ -158,11 +143,6 @@ public class RecordsTag : TagAbstract {
         if (response.IsSuccessful)
         {
             return this.Parser.Parse<BulkUpdateResponse>(response.Content);
-        }
-
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
         }
 
         throw (int) response.StatusCode switch
@@ -196,11 +176,6 @@ public class RecordsTag : TagAbstract {
             return this.Parser.Parse<Record>(response.Content);
         }
 
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
-        }
-
         throw (int) response.StatusCode switch
         {
             _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
@@ -229,11 +204,6 @@ public class RecordsTag : TagAbstract {
         if (response.IsSuccessful)
         {
             return this.Parser.Parse<BulkUpdateResponse>(response.Content);
-        }
-
-        if (response.ErrorException != null)
-        {
-            throw new ClientException("An unknown error occurred: " + response.ErrorException.Message, response.ErrorException);
         }
 
         throw (int) response.StatusCode switch

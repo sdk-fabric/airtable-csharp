@@ -36,6 +36,14 @@ public class Client : ClientAbstract
         );
     }
 
+    public FieldsTag Fields()
+    {
+        return new FieldsTag(
+            this.HttpClient,
+            this.Parser
+        );
+    }
+
 
 
     public static Client Build(string token)
