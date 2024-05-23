@@ -44,6 +44,14 @@ public class Client : ClientAbstract
         );
     }
 
+    public TableTag Table()
+    {
+        return new TableTag(
+            this.HttpClient,
+            this.Parser
+        );
+    }
+
 
 
     public static Client Build(string token)
