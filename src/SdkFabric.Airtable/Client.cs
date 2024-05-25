@@ -44,9 +44,17 @@ public class Client : ClientAbstract
         );
     }
 
-    public TableTag Table()
+    public TablesTag Tables()
     {
-        return new TableTag(
+        return new TablesTag(
+            this.HttpClient,
+            this.Parser
+        );
+    }
+
+    public CommentsTag Comments()
+    {
+        return new CommentsTag(
             this.HttpClient,
             this.Parser
         );
