@@ -42,6 +42,10 @@ public class FieldsTag : TagAbstract {
 
         throw (int) response.StatusCode switch
         {
+            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
             _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
         };
     }
@@ -70,6 +74,10 @@ public class FieldsTag : TagAbstract {
 
         throw (int) response.StatusCode switch
         {
+            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
+            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
             _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
         };
     }
