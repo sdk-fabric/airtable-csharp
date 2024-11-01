@@ -10,5 +10,5 @@ public class CommentCollection
     [JsonPropertyName("offset")]
     public string? Offset { get; set; }
     [JsonPropertyName("records")]
-    public List<Comment>? Records { get; set; }
+    public System.Collections.Generic.List<Comment>? Records { get; set; }
 }

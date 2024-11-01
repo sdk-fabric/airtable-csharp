@@ -47,23 +47,47 @@ public class RecordsTag : TagAbstract {
         RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName", pathParams), Method.Get);
         this.Parser.Query(request, queryParams, queryStructNames);
 
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<RecordCollection>(response.Content);
+            var data = this.Parser.Parse<RecordCollection>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Retrieve a single record. Any &quot;empty&quot; fields (e.g. &quot;&quot;, [], or false) in the record will not be returned.
      */
@@ -81,23 +105,47 @@ public class RecordsTag : TagAbstract {
         RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName/:recordId", pathParams), Method.Get);
         this.Parser.Query(request, queryParams, queryStructNames);
 
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Record>(response.Content);
+            var data = this.Parser.Parse<Record>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Creates multiple records. Note that table names and table ids can be used interchangeably. We recommend using table IDs so you don&#039;t need to modify your API request when your table name changes.
      */
@@ -115,23 +163,48 @@ public class RecordsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<RecordCollection>(response.Content);
+            var data = this.Parser.Parse<RecordCollection>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Updates a single record. Table names and table ids can be used interchangeably. We recommend using table IDs so you don&#039;t need to modify your API request when your table name changes.
      */
@@ -150,23 +223,48 @@ public class RecordsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Record>(response.Content);
+            var data = this.Parser.Parse<Record>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Updates up to 10 records, or upserts them when performUpsert is set.
      */
@@ -184,23 +282,48 @@ public class RecordsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<BulkUpdateResponse>(response.Content);
+            var data = this.Parser.Parse<BulkUpdateResponse>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Updates a single record. Table names and table ids can be used interchangeably. We recommend using table IDs so you don&#039;t need to modify your API request when your table name changes.
      */
@@ -219,23 +342,48 @@ public class RecordsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Record>(response.Content);
+            var data = this.Parser.Parse<Record>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
     /**
      * Updates up to 10 records, or upserts them when performUpsert is set.
      */
@@ -253,21 +401,77 @@ public class RecordsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<BulkUpdateResponse>(response.Content);
+            var data = this.Parser.Parse<BulkUpdateResponse>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
+    /**
+     * Deletes a single record
+     */
+    public async Task<DeleteResponse> Delete(string baseId, string tableIdOrName, string recordId)
+    {
+        Dictionary<string, object> pathParams = new();
+        pathParams.Add("baseId", baseId);
+        pathParams.Add("tableIdOrName", tableIdOrName);
+        pathParams.Add("recordId", recordId);
+
+        Dictionary<string, object> queryParams = new();
+
+        List<string> queryStructNames = new();
+
+        RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName/:recordId", pathParams), Method.Delete);
+        this.Parser.Query(request, queryParams, queryStructNames);
+
+
+        RestResponse response = await this.HttpClient.ExecuteAsync(request);
+
+        if (response.IsSuccessful)
+        {
+            var data = this.Parser.Parse<DeleteResponse>(response.Content);
+
+            return data;
+        }
+
+        var statusCode = (int) response.StatusCode;
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
     }
 
 

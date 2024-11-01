@@ -8,9 +8,9 @@ namespace SdkFabric.Airtable;
 public class BulkUpdateResponse
 {
     [JsonPropertyName("createdRecords")]
-    public List<string>? CreatedRecords { get; set; }
+    public System.Collections.Generic.List<string>? CreatedRecords { get; set; }
     [JsonPropertyName("updatedRecords")]
-    public List<string>? UpdatedRecords { get; set; }
+    public System.Collections.Generic.List<string>? UpdatedRecords { get; set; }
     [JsonPropertyName("records")]
-    public List<Record>? Records { get; set; }
+    public System.Collections.Generic.List<Record>? Records { get; set; }
 }
