@@ -8,11 +8,11 @@ namespace SdkFabric.Airtable;
 public class BulkUpdateRequest
 {
     [JsonPropertyName("performUpsert")]
-    public List<string>? PerformUpsert { get; set; }
+    public System.Collections.Generic.List<string>? PerformUpsert { get; set; }
     [JsonPropertyName("returnFieldsByFieldId")]
     public bool? ReturnFieldsByFieldId { get; set; }
     [JsonPropertyName("typecast")]
     public bool? Typecast { get; set; }
     [JsonPropertyName("records")]
-    public List<Record>? Records { get; set; }
+    public System.Collections.Generic.List<Record>? Records { get; set; }
 }

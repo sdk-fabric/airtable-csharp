@@ -35,23 +35,51 @@ public class TablesTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Table>(response.Content);
+            var data = this.Parser.Parse<Table>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
+    /**
+     * Updates the name and/or description of a table. At least one of name or description must be specified.
+     */
     public async Task<Table> Update(string baseId, string tableIdOrName, Table payload)
     {
         Dictionary<string, object> pathParams = new();
@@ -66,21 +94,47 @@ public class TablesTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Table>(response.Content);
+            var data = this.Parser.Parse<Table>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
     }
 
 

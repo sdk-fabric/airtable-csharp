@@ -10,5 +10,5 @@ public class RecordCollection
     [JsonPropertyName("offset")]
     public string? Offset { get; set; }
     [JsonPropertyName("records")]
-    public List<Record>? Records { get; set; }
+    public System.Collections.Generic.List<Record>? Records { get; set; }
 }

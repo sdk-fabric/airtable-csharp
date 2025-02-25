@@ -19,6 +19,9 @@ public class CommentsTag : TagAbstract {
     }
 
 
+    /**
+     * Returns a list of comments for the record from newest to oldest.
+     */
     public async Task<CommentCollection> GetAll(string baseId, string tableIdOrName, string recordId)
     {
         Dictionary<string, object> pathParams = new();
@@ -33,23 +36,50 @@ public class CommentsTag : TagAbstract {
         RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName/:recordId/comments", pathParams), Method.Get);
         this.Parser.Query(request, queryParams, queryStructNames);
 
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<CommentCollection>(response.Content);
+            var data = this.Parser.Parse<CommentCollection>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
+    /**
+     * Creates a comment on a record. User mentioned is supported.
+     */
     public async Task<Comment> Create(string baseId, string tableIdOrName, string recordId, Comment payload)
     {
         Dictionary<string, object> pathParams = new();
@@ -65,23 +95,51 @@ public class CommentsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Comment>(response.Content);
+            var data = this.Parser.Parse<Comment>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
+    /**
+     * Updates a comment on a record. API users can only update comments they have created. User mentioned is supported.
+     */
     public async Task<Comment> Update(string baseId, string tableIdOrName, string recordId, string rowCommentId, Comment payload)
     {
         Dictionary<string, object> pathParams = new();
@@ -98,24 +156,52 @@ public class CommentsTag : TagAbstract {
         this.Parser.Query(request, queryParams, queryStructNames);
         request.AddJsonBody(JsonSerializer.Serialize(payload));
 
+        request.AddOrUpdateHeader("Content-Type", "application/json");
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<Comment>(response.Content);
+            var data = this.Parser.Parse<Comment>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
-    }
+            var data = this.Parser.Parse<Error>(response.Content);
 
-    public async Task<CommentDeleteResponse> Delete(string baseId, string tableIdOrName, string recordId, string rowCommentId)
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+    }
+    /**
+     * Deletes a comment from a record. Non-admin API users can only delete comments they have created. Enterprise Admins can delete any comment from a record.
+     */
+    public async Task<DeleteResponse> Delete(string baseId, string tableIdOrName, string recordId, string rowCommentId)
     {
         Dictionary<string, object> pathParams = new();
         pathParams.Add("baseId", baseId);
@@ -130,21 +216,46 @@ public class CommentsTag : TagAbstract {
         RestRequest request = new(this.Parser.Url("/v0/:baseId/:tableIdOrName/:recordId/comments/:rowCommentId", pathParams), Method.Delete);
         this.Parser.Query(request, queryParams, queryStructNames);
 
+
         RestResponse response = await this.HttpClient.ExecuteAsync(request);
 
         if (response.IsSuccessful)
         {
-            return this.Parser.Parse<CommentDeleteResponse>(response.Content);
+            var data = this.Parser.Parse<DeleteResponse>(response.Content);
+
+            return data;
         }
 
-        throw (int) response.StatusCode switch
+        var statusCode = (int) response.StatusCode;
+        if (statusCode == 400)
         {
-            400 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            403 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            404 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            500 => new ErrorException(this.Parser.Parse<Error>(response.Content)),
-            _ => throw new UnknownStatusCodeException("The server returned an unknown status code"),
-        };
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 403)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 404)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        if (statusCode == 500)
+        {
+            var data = this.Parser.Parse<Error>(response.Content);
+
+            throw new ErrorException(data);
+        }
+
+        throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
     }
 
 

@@ -16,5 +16,5 @@ public class Table
     [JsonPropertyName("description")]
     public string? Description { get; set; }
     [JsonPropertyName("fields")]
-    public List<Field>? Fields { get; set; }
+    public System.Collections.Generic.List<Field>? Fields { get; set; }
 }
