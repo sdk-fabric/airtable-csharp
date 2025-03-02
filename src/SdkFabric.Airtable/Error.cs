@@ -4,9 +4,13 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class Error
 {
     [JsonPropertyName("error")]
     public ErrorDetails? Error { get; set; }
+
 }
+

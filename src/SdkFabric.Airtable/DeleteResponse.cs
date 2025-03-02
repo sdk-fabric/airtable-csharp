@@ -4,11 +4,16 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class DeleteResponse
 {
     [JsonPropertyName("deleted")]
     public bool? Deleted { get; set; }
+
     [JsonPropertyName("id")]
     public string? Id { get; set; }
+
 }
+

@@ -4,17 +4,25 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class Table
 {
     [JsonPropertyName("id")]
     public string? Id { get; set; }
+
     [JsonPropertyName("primaryFieldId")]
     public string? PrimaryFieldId { get; set; }
+
     [JsonPropertyName("name")]
     public string? Name { get; set; }
+
     [JsonPropertyName("description")]
     public string? Description { get; set; }
+
     [JsonPropertyName("fields")]
     public System.Collections.Generic.List<Field>? Fields { get; set; }
+
 }
+

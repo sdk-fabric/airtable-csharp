@@ -4,15 +4,22 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class BulkUpdateRequest
 {
     [JsonPropertyName("performUpsert")]
     public System.Collections.Generic.List<string>? PerformUpsert { get; set; }
+
     [JsonPropertyName("returnFieldsByFieldId")]
     public bool? ReturnFieldsByFieldId { get; set; }
+
     [JsonPropertyName("typecast")]
     public bool? Typecast { get; set; }
+
     [JsonPropertyName("records")]
     public System.Collections.Generic.List<Record>? Records { get; set; }
+
 }
+

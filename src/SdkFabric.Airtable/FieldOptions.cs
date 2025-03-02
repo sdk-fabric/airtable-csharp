@@ -5,7 +5,10 @@
 
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+
 namespace SdkFabric.Airtable;
+
 public class FieldOptions : Dictionary<string, object>
 {
 }
+

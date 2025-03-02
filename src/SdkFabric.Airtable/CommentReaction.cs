@@ -4,11 +4,16 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class CommentReaction
 {
     [JsonPropertyName("emoji")]
     public string? Emoji { get; set; }
+
     [JsonPropertyName("reactingUser")]
     public CommentAuthor? ReactingUser { get; set; }
+
 }
+

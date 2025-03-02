@@ -4,11 +4,16 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class RecordCollection
 {
     [JsonPropertyName("offset")]
     public string? Offset { get; set; }
+
     [JsonPropertyName("records")]
     public System.Collections.Generic.List<Record>? Records { get; set; }
+
 }
+

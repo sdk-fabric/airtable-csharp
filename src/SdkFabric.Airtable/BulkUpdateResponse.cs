@@ -4,13 +4,19 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class BulkUpdateResponse
 {
     [JsonPropertyName("createdRecords")]
     public System.Collections.Generic.List<string>? CreatedRecords { get; set; }
+
     [JsonPropertyName("updatedRecords")]
     public System.Collections.Generic.List<string>? UpdatedRecords { get; set; }
+
     [JsonPropertyName("records")]
     public System.Collections.Generic.List<Record>? Records { get; set; }
+
 }
+

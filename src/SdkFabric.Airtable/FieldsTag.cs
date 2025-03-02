@@ -48,28 +48,7 @@ public class FieldsTag : TagAbstract {
         }
 
         var statusCode = (int) response.StatusCode;
-        if (statusCode == 400)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 403)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 404)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 500)
+        if (statusCode >= 0 && statusCode <= 999)
         {
             var data = this.Parser.Parse<Error>(response.Content);
 
@@ -108,28 +87,7 @@ public class FieldsTag : TagAbstract {
         }
 
         var statusCode = (int) response.StatusCode;
-        if (statusCode == 400)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 403)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 404)
-        {
-            var data = this.Parser.Parse<Error>(response.Content);
-
-            throw new ErrorException(data);
-        }
-
-        if (statusCode == 500)
+        if (statusCode >= 0 && statusCode <= 999)
         {
             var data = this.Parser.Parse<Error>(response.Content);
 

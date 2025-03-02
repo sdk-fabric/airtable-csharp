@@ -4,11 +4,16 @@
  */
 
 using System.Text.Json.Serialization;
+
 namespace SdkFabric.Airtable;
+
 public class User
 {
     [JsonPropertyName("email")]
     public string? Email { get; set; }
+
     [JsonPropertyName("id")]
     public string? Id { get; set; }
+
 }
+
