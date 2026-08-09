@@ -4,7 +4,8 @@ on:
     - cron: '0 0 * * 1' # Runs every Monday
   workflow_dispatch:
 permissions:
-  contents: 'write'
+  contents: write
+  workflows: write
 jobs:
   sync-template:
     runs-on: ubuntu-latest
