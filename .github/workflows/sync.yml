@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-  workflows: write
+  actions: write
 jobs:
   sync-template:
     runs-on: ubuntu-latest
