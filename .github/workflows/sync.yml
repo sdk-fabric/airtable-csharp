@@ -1,11 +1,8 @@
 name: Template-Sync
 on:
-  schedule:
-    - cron: '0 0 * * 1' # Runs every Monday
   workflow_dispatch:
 permissions:
   contents: write
-  actions: write
 jobs:
   sync-template:
     runs-on: ubuntu-latest
